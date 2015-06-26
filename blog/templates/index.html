@@ -1,17 +1,20 @@
 {% load url from future %}
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Potato's Blog</title>
+    <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
 </head>
 <body>
-<form action="{% url 'index' %}">
-    <select name="example">
-    <option value="A">All</option>
-    <option value="awesome">Awesome stuff</option>
-    <option value="colourful">Colourful stuff</option>
-</select>
+<form id="filter" action="{% url 'index' %}">
+    <select id="category-selector" name="category">
+        <option value="A">All</option>
+        <option value="awesome">Awesome stuff</option>
+        <option value="colourful">Colourful stuff</option>
+    </select>
 </form>
     {% if articles %}
         <ul>

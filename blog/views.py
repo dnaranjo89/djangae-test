@@ -3,7 +3,8 @@ from blog.models import *
 from django.shortcuts import redirect
 
 def index(request):
-    article_list = Article.objects.order_by('title')[:10]
+    filter_category = request.GET.get("category")
+    article_list = Article.objects.filter(category__name__contains=filter_category)[:10]
     context_dict = {'articles': article_list}
     return render(request, 'index.html', context_dict)
 
