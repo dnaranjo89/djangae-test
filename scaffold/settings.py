@@ -13,6 +13,8 @@ from django.core.urlresolvers import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -43,6 +45,7 @@ INSTALLED_APPS = (
     'cspreports',
     'djangae.contrib.gauth.datastore',
     'djangae.contrib.security',
+    'blog',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -123,3 +126,4 @@ CSP_CONNECT_SRC = ("'self'", "plus.google.com", "www.google-analytics.com")
 
 
 from djangae.contrib.gauth.settings import *
+
