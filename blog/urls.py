@@ -7,5 +7,6 @@ urlpatterns = patterns(None)
 urlpatterns += patterns(
     '',
     url(r'^index', views.index, name='index'),
+    url(r'^populate', views.populate, name='populate'),
 )
 
