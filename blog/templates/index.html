@@ -1,3 +1,4 @@
+{% load url from future %}
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -5,16 +6,21 @@
     <title></title>
 </head>
 <body>
- trial!
-
-        {% if categories %}
-            <ul>
-                {% for category in categories %}
-                <li>{{ category.name }}</li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <strong>There are no categories present.</strong>
-        {% endif %}
+<form action="{% url 'index' %}">
+    <select name="example">
+    <option value="A">All</option>
+    <option value="awesome">Awesome stuff</option>
+    <option value="colourful">Colourful stuff</option>
+</select>
+</form>
+    {% if articles %}
+        <ul>
+            {% for article in articles %}
+                <li>{{ article.title }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <strong>There are no articles to present.</strong>
+    {% endif %}
 </body>
 </html>
