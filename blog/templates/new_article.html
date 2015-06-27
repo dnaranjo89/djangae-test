@@ -1,3 +1,4 @@
+{% extends "base.html" %}
 {% block content %}
     <form id="article-form" method="post" action="{% url 'new_article' %}">
         {% csrf_token %}
