@@ -3,9 +3,14 @@ from blog.models import *
 from django.shortcuts import redirect
 
 def index(request):
-    filter_category = request.GET.get("category")
-    article_list = Article.objects.filter(category__name__contains=filter_category)[:10]
-    context_dict = {'articles': article_list}
+    filter_category = request.GET.get("category", "All")
+    if filter_category and filter_category != "All":
+        category_key = Category.all().filter('name =', filter_category).get()
+        article_list = Article.all().filter('category =', category_key)
+    else:
+        article_list = Article.all()
+
+    context_dict = {'articles': article_list, 'category': filter_category}
     return render(request, 'index.html', context_dict)
 
 
@@ -22,7 +27,7 @@ def populate(request):
     add_article(category=cat1,
         title="Article3")
 
-    cat2 = add_category("Colourfull stuff")
+    cat2 = add_category("Colourful stuff")
 
     add_article(category=cat2,
         title="Article4")
@@ -42,18 +47,18 @@ def populate(request):
         title="Article8")
 
     # Print out what we have added to the user.
-    for c in Category.objects.all():
-        for a in Article.objects.filter(category=c):
+    for c in Category.all():
+        for a in Article.all().filter('category=',c):
             print "- Added {0} ({1})".format(str(a), str(c))
 
     return redirect('index')
 
 def add_article(category, title, views=0):
-    a = Article.objects.get_or_create(category=category, title=title)[0]
+    a = Article(category=category, title=title).put()
     a.views=views
-    a.save()
+
     return a
 
 def add_category(name):
-    c = Category.objects.get_or_create(name=name)[0]
+    c = Category(name=name).put()
     return c
