@@ -11,14 +11,31 @@ def index(request):
     else:
         article_list = Article.all()
 
-    form = ArticleForm()
-
-    context_dict = {'articles': article_list, 'category': filter_category, 'form':form}
+    context_dict = {'articles': article_list, 'category': filter_category}
     return render(request, 'index.html', context_dict)
 
 
-# ===========  POPULATE  ==============
+def new_article(request):
+    """
+    Add a new article to the DB
+    """
+    form = ArticleForm()
+    if request.method == 'POST':
+        form = ArticleForm(request.POST)
+        if form.validate():
+            article = Article()
+            form.populate_obj(article)
+            article.put()
+
+    context_dict = {'form': form}
+    return render(request, 'new_article.html', context_dict)
+
+
+
 def populate(request):
+    """
+    Populates the database with some Categories and Articles
+    """
     cat1 = add_category('Awesome stuff')
 
     add_article(category=cat1,
