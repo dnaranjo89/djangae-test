@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from blog.models import *
+from blog.forms import ArticleForm
 from django.shortcuts import redirect
 
 def index(request):
@@ -10,7 +11,9 @@ def index(request):
     else:
         article_list = Article.all()
 
-    context_dict = {'articles': article_list, 'category': filter_category}
+    form = ArticleForm()
+
+    context_dict = {'articles': article_list, 'category': filter_category, 'form':form}
     return render(request, 'index.html', context_dict)
 
 
