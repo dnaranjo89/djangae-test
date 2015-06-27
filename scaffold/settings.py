@@ -55,6 +55,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'djangae.contrib.gauth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'csp.middleware.CSPMiddleware',
     'session_csrf.CsrfMiddleware',
@@ -136,3 +137,8 @@ CSP_CONNECT_SRC = ("'self'", "plus.google.com", "www.google-analytics.com")
 
 from djangae.contrib.gauth.settings import *
 
+DJANGAE_ALLOW_USER_PRE_CREATION = True
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
