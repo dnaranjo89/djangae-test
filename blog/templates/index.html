@@ -1,32 +1,21 @@
-{% load url from future %}
-{% load staticfiles %}
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Potato's Blog</title>
-    <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
-    <script src="{% static 'js/script.js' %}"></script>
-</head>
-<body>
-<form id="filter" action="{% url 'index' %}">
-    <select id="category-selector" name="category" data-selected="{{ category }}">
-        <option value="All">All</option>
-        <option value="Awesome stuff">Awesome stuff</option>
-        <option value="Colourful stuff">Colourful stuff</option>
-    </select>
-</form>
-    {% if articles %}
-        <ul>
-            {% for article in articles %}
-                <li>{{ article.title }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <strong>There are no articles to present.</strong>
-    {% endif %}
+{% block content %}
+    <form id="filter" action="{% url 'index' %}">
+        <select id="category-selector" name="category" data-selected="{{ category }}">
+            <option value="All">All</option>
+            <option value="Awesome stuff">Awesome stuff</option>
+            <option value="Colourful stuff">Colourful stuff</option>
+        </select>
+    </form>
+        {% if articles %}
+            <ul>
+                {% for article in articles %}
+                    <li>{{ article.title }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>There are no articles to present.</strong>
+        {% endif %}
 
----<br/>
-<a href="{% url "new_article" %}">Create a new article</a>
-</body>
-</html>
+    ---<br/>
+    <a href="{% url "new_article" %}">Create a new article</a>
+{% endblock content %}
