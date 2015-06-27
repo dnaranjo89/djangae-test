@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from blog.models import *
-from blog.forms import ArticleForm
+from blog.forms import ArticleForm, CommentForm
 from django.shortcuts import redirect
+from django.core.urlresolvers import reverse
+
 
 def index(request):
     filter_category = request.GET.get("category", "All")
@@ -32,11 +34,21 @@ def new_article(request):
 
 
 def display_article(request, article_id):
+    article_id = int(article_id)
+    comment_form = CommentForm()
     article = Article.get_by_id(int(article_id))
     article_form = ArticleForm(obj=article)
-    context_dict = {'article_form': article_form}
+    context_dict = {'article_id': article_id, 'article_form': article_form, 'comment_form': comment_form}
     return render(request, 'display_article.html', context_dict)
 
+def send_comment(request, article_id):
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.validate():
+            comment = Comment()
+            comment_form.populate_obj(comment)
+            comment.put()
+    redirect(reverse('display_article', kwargs={'article_id': article_id}))
 
 def populate(request):
     """

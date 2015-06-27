@@ -6,4 +6,17 @@
         {{ field }}
         <br>
     {% endfor %}
+    <p>---------------</p>
+
+    <p>---------------</p>
+
+    <form method="post"  action="{% url 'comment' article_id=article_id %}">
+        {% csrf_token %}
+        {% for field in comment_form %}
+            {{ field.label }}
+            {{ field }}
+            <br>
+        {% endfor %}
+        <input type="submit" name="submit" value="Comment" />
+    </form>
 {% endblock content %}

@@ -20,3 +20,12 @@ class Article(db.Model):
 
     def __unicode__(self):      #For Python 2, use __str__ on Python 3
         return self.title
+
+class Comment(db.Model):
+    article = db.ReferenceProperty(Article)
+    user = db.StringProperty()
+    timestamp = db.DateTimeProperty()
+    comment = db.TextProperty()
+
+    def __unicode__(self):      #For Python 2, use __str__ on Python 3
+        return self.user
