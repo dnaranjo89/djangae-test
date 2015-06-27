@@ -10,10 +10,10 @@
 </head>
 <body>
 <form id="filter" action="{% url 'index' %}">
-    <select id="category-selector" name="category">
-        <option value="A">All</option>
-        <option value="awesome">Awesome stuff</option>
-        <option value="colourful">Colourful stuff</option>
+    <select id="category-selector" name="category" data-selected="{{ category }}">
+        <option value="All">All</option>
+        <option value="Awesome stuff">Awesome stuff</option>
+        <option value="Colourful stuff">Colourful stuff</option>
     </select>
 </form>
     {% if articles %}
