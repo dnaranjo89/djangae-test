@@ -2,6 +2,8 @@ from django.shortcuts import render
 from blog.models import *
 from blog.forms import ArticleForm
 from django.shortcuts import redirect
+from django.contrib.auth import authenticate, login
+
 
 def index(request):
     filter_category = request.GET.get("category", "All")
@@ -14,6 +16,18 @@ def index(request):
     context_dict = {'articles': article_list, 'category': filter_category}
     return render(request, 'index.html', context_dict)
 
+def signin(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(email=email)
+        if user:
+            login(request, user)
+            return render(request, 'signin.html', {'result':'ok!'})
+        else:
+            return render(request, 'signin.html', {'result':'nooo!'})
+    else:
+        return render(request, 'signin.html', {'result':'get'})
 
 def new_article(request):
     """
