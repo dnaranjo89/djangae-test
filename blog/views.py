@@ -31,6 +31,12 @@ def new_article(request):
     return render(request, 'new_article.html', context_dict)
 
 
+def display_article(request, article_id):
+    article = Article.get_by_id(int(article_id))
+    article_form = ArticleForm(obj=article)
+    context_dict = {'article_form': article_form}
+    return render(request, 'display_article.html', context_dict)
+
 
 def populate(request):
     """

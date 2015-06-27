@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+    <a href="{% url 'index' %}">Back</a><br/>
+    {% for field in article_form %}
+        {{ field.label }}
+        {{ field }}
+        <br>
+    {% endfor %}
+{% endblock content %}
