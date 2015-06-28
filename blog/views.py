@@ -37,6 +37,8 @@ def display_article(request, article_id):
     # Get the details of the article
     article_id = int(article_id)
     article = Article.get_by_id(article_id)
+    article.views += 1
+    article.put()
     article_form = ArticleForm(obj=article)
 
     # Get the Article's comments (if exist)
