@@ -10,7 +10,13 @@
         {% if articles %}
             <ul>
                 {% for article in articles %}
-                    <li><a href="{% url 'display_article' article_id=article.key.id %}">{{ article.title }}</a></li>
+                    <div class="article-overview">
+                        <img src="{{ article.image }}" alt="Image article"/>
+                        <a href="{% url 'display_article' article_id=article.key.id %}">
+                            <p>{{ article.title }}</p>
+                        </a>
+                        <p>{{ article.body }}</p>
+                    </div>
                 {% endfor %}
             </ul>
         {% else %}

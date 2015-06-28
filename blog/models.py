@@ -11,10 +11,10 @@ class Article(db.Model):
     title = db.StringProperty()
     views = db.IntegerProperty()
     category = db.ReferenceProperty(Category)
+    image = db.URLProperty()
+    body = db.TextProperty()
     '''category = models.ForeignKey(Category)
     title = models.CharField(max_length=100)
-    body = models.CharField(max_length=1000)
-    image = models.URLField()
     tags = models.CharField(max_length=100)
     views = models.IntegerField(default=0)'''
 
