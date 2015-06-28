@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
     <form id="filter" action="{% url 'index' %}">
         <select id="category-selector" name="category" data-selected="{{ category }}">
@@ -7,22 +8,20 @@
             <option value="Colourful stuff">Colourful stuff</option>
         </select>
     </form>
-        {% if articles %}
-            <ul>
+        <a href="{% url "new_article" %}">Create a new article</a>
+        <div id="articles-list" class="col-md-8 col-md-offset-2">
+            {% if articles %}
                 {% for article in articles %}
-                    <div class="article-overview">
-                        <img src="{{ article.image }}" alt="Image article"/>
-                        <a href="{% url 'display_article' article_id=article.key.id %}">
-                            <p>{{ article.title }}</p>
-                        </a>
+
+
+                    <div class="row article-overview">
+                        <a href="{% url 'display_article' article_id=article.key.id %}"><img src="{% static article.image %}" alt="Image article" class="pull-left" /></a>
+                        <a href="{% url 'display_article' article_id=article.key.id %}"><p>{{ article.title }}</p></a>
                         <p>{{ article.body }}</p>
                     </div>
                 {% endfor %}
-            </ul>
-        {% else %}
-            <strong>There are no articles to present.</strong>
-        {% endif %}
-
-    ---<br/>
-    <a href="{% url "new_article" %}">Create a new article</a>
+            {% else %}
+                <strong>There are no articles to present.</strong>
+            {% endif %}
+        </div>
 {% endblock content %}

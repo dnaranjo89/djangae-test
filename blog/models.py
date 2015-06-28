@@ -11,7 +11,7 @@ class Article(db.Model):
     title = db.StringProperty()
     views = db.IntegerProperty()
     category = db.ReferenceProperty(Category)
-    image = db.URLProperty()
+    image = db.StringProperty()
     body = db.TextProperty()
     '''category = models.ForeignKey(Category)
     title = models.CharField(max_length=100)
