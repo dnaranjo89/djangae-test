@@ -17,6 +17,7 @@
                     <div class="row article-overview">
                         <a href="{% url 'display_article' article_id=article.key.id %}"><img src="{% static article.image %}" alt="Image article" class="pull-left" /></a>
                         <a href="{% url 'display_article' article_id=article.key.id %}"><p>{{ article.title }}</p></a>
+                        <span class="views"><span class="glyphicon glyphicon-eye-open"></span> {{ article.views }}</span>
                         <p>{{ article.body }}</p>
                     </div>
                 {% endfor %}

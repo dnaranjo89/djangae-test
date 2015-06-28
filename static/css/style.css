@@ -15,6 +15,14 @@
     padding: 10px;
 }
 
+.views {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #6e6e6e;
+    margin: 5px 10px;
+}
+
 .article-overview:after {
     content:"";
     width: 100%;
