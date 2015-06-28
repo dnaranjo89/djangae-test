@@ -6,7 +6,7 @@ from blog.models import Article, Comment
 ArticleFormBase = model_form(Article)
 
 class ArticleForm(ArticleFormBase):
-    title = fields.StringField(label="title")
+    views = fields.IntegerField(default=0)
 
 CommentFormBase = model_form(Comment)
 

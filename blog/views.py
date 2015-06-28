@@ -28,6 +28,7 @@ def new_article(request):
             article = Article()
             form.populate_obj(article)
             article.put()
+            return redirect('index')
 
     context_dict = {'form': form}
     return render(request, 'new_article.html', context_dict)

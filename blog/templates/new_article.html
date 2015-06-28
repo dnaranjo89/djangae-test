@@ -1,12 +1,24 @@
 {% extends "base.html" %}
+{% load wtforms %}
+{% load static %}
 {% block content %}
+    <a href="{% url 'index' %}"><img id="back-arrow" src="{% static "img/back.png" %}" alt="Back"/> Back</a><br/>
     <form id="article-form" method="post" action="{% url 'new_article' %}">
         {% csrf_token %}
-        {% for field in form %}
-            {{ field.label }}
-            {{ field }}
-            <br>
-        {% endfor %}
-        <input type="submit" name="submit" value="Create Article" />
+        <div class="form-group">
+            <label for="title">{{ form.title.label }}</label>
+            {% form_field form.title class="form-control" %}
+        </div>
+        <div class="form-group">
+            <label for="body">{{ form.body.label }}</label>
+            {% form_field form.body class="form-control" placeholder="Write your article here..."%}
+        </div>
+        <div class="form-group">
+            <label for="body">{{ form.category.label }}</label>
+            {% form_field form.category class="form-control"%}
+        </div>
+        {% form_field form.image class="hidden" value="img/1.jpg"%}
+        {% form_field form.views class="hidden" %}
+        <button type="submit" name="submit" class="btn btn-primary">Create Article</button>
     </form>
 {% endblock content %}
