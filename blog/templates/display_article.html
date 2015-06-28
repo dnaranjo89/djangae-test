@@ -2,7 +2,7 @@
 {% load wtforms %}
 {% load static %}
 {% block content %}
-    <a href="{% url 'index' %}">Back</a><br/>
+    <a href="{% url 'index' %}"><img id="back-arrow" src="{% static "img/back.png" %}" alt="Back"/> Back</a><br/>
     <div id="full-article">
         <div id="header-article">
             <img src="{% static article.image %}" alt="Image article"/>
@@ -11,25 +11,24 @@
         {{ article.body }}
     {{ article_form.image }}
     </div>
-    <p>---------------</p>
+    <h2 class="h3">Comments</h2>
     <div id="comments-list">
         {% if comments_list %}
-            <ul>
             {% for comment in comments_list %}
-                    <li>{{ comment.comment }}</li>
+                <div class="comment-box">
+                    {{ comment.comment }}
+                </div>
             {% endfor %}
-            </ul>
         {% else %}
             There are no comments yet. Be the first!
         {% endif %}
     </div>
-    <p>---------------</p>
     <div id="comment-form">
         <form method="post"  action="{% url 'comment' article_id=article_id %}">
             {% csrf_token %}
             {% form_field comment_form.article class="hidden" %}
             <div class="form-group">
-                <label for="comment">Comment:</label>
+                <label for="comment">Leave your comment:</label>
                 {% form_field comment_form.comment class="form-control" %}
             </div>
             <div class="col-xs-12 text-right"><button type="submit" name="submit" class="btn btn-primary">Comment</button></div>

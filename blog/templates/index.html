@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+    <div id="brand" class="text-center">Keep it simple.</div>
     <div class="row">
         <form id="filter" action="{% url 'index' %}" class="col-xs-6">
             <select id="category-selector" name="category" data-selected="{{ category }}" class="form-control">
@@ -10,7 +11,7 @@
                 <option value="Plain stuff">Plain stuff</option>
             </select>
         </form>
-        <a href="{% url "new_article" %}" class="col-xs-6 text-right">Create a new article</a>
+        <div class="col-xs-6"><a href="{% url "new_article" %}" class="btn btn-primary pull-right">New article</a></div>
     </div>
     <div id="articles-list">
         {% if articles %}

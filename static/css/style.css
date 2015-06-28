@@ -1,9 +1,13 @@
-.container {
-    margin-top: 100px;
-}
 
 #wrapper {
+    margin-top: 50px;
+    margin-bottom: 50px;
     padding: 0;
+}
+
+#brand {
+    font-size: 60px;
+    margin-bottom: 50px;
 }
 
 .article-overview {
@@ -61,4 +65,17 @@
 
 #comment {
     width: 100%;
+}
+
+#back-arrow {
+    width: 40px;
+    height: auto;
+    margin: 5px 0 5px;
+}
+
+.comment-box {
+    border: 1px solid #a1a1a1;
+    padding: 5px;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
