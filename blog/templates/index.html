@@ -1,28 +1,33 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <form id="filter" action="{% url 'index' %}">
-        <select id="category-selector" name="category" data-selected="{{ category }}">
-            <option value="All">All</option>
-            <option value="Awesome stuff">Awesome stuff</option>
-            <option value="Colourful stuff">Colourful stuff</option>
-        </select>
-    </form>
-        <a href="{% url "new_article" %}">Create a new article</a>
-        <div id="articles-list" class="col-md-8 col-md-offset-2">
-            {% if articles %}
-                {% for article in articles %}
+        <div id="wrapper" class="col-md-8 col-md-offset-2">
+            <div class="row">
+                <form id="filter" action="{% url 'index' %}" class="col-xs-6 ">
+                    <select id="category-selector" name="category" data-selected="{{ category }}">
+                        <option value="All">All</option>
+                        <option value="Awesome stuff">Awesome stuff</option>
+                        <option value="Colourful stuff">Colourful stuff</option>
+                        <option value="Plain stuff">Plain stuff</option>
+                    </select>
+                </form>
+                <a href="{% url "new_article" %}" class="col-xs-6 text-right">Create a new article</a>
+            </div>
+            <div id="articles-list">
+                {% if articles %}
+                    {% for article in articles %}
 
 
-                    <div class="row article-overview">
-                        <a href="{% url 'display_article' article_id=article.key.id %}"><img src="{% static article.image %}" alt="Image article" class="pull-left" /></a>
-                        <a href="{% url 'display_article' article_id=article.key.id %}"><p>{{ article.title }}</p></a>
-                        <span class="views"><span class="glyphicon glyphicon-eye-open"></span> {{ article.views }}</span>
-                        <p>{{ article.body }}</p>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <strong>There are no articles to present.</strong>
-            {% endif %}
+                        <div class="row article-overview">
+                            <a href="{% url 'display_article' article_id=article.key.id %}"><img src="{% static article.image %}" alt="Image article" class="pull-left" /></a>
+                            <a href="{% url 'display_article' article_id=article.key.id %}"><p>{{ article.title }}</p></a>
+                            <span class="views"><span class="glyphicon glyphicon-eye-open"></span> {{ article.views }}</span>
+                            <p>{{ article.body }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <strong>There are no articles to present.</strong>
+                {% endif %}
+            </div>
         </div>
 {% endblock content %}
