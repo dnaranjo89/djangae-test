@@ -1,23 +1,38 @@
 {% extends "base.html" %}
 {% load wtforms %}
+{% load static %}
 {% block content %}
     <a href="{% url 'index' %}">Back</a><br/>
-    {% for field in article_form %}
-        {{ field.label }}
-        {{ field }}
-        <br>
-    {% endfor %}
+    <div id="full-article">
+        <div id="header-article">
+            <img src="{% static article.image %}" alt="Image article"/>
+        </div>
+        <h1 class="text-center">{{ article.title }}</h1>
+        {{ article.body }}
+    {{ article_form.image }}
+    </div>
     <p>---------------</p>
-    {% for comment in comments_list %}
-            {{ comment.comment }}
-            <br>
-    {% endfor %}
+    <div id="comments-list">
+        {% if comments_list %}
+            <ul>
+            {% for comment in comments_list %}
+                    <li>{{ comment.comment }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            There are no comments yet. Be the first!
+        {% endif %}
+    </div>
     <p>---------------</p>
-
-    <form method="post"  action="{% url 'comment' article_id=article_id %}">
-        {% csrf_token %}
-        {% form_field comment_form.article class="hidden" %}
-        {{ comment_form.comment }}
-        <input type="submit" name="submit" value="Comment" />
-    </form>
+    <div id="comment-form">
+        <form method="post"  action="{% url 'comment' article_id=article_id %}">
+            {% csrf_token %}
+            {% form_field comment_form.article class="hidden" %}
+            <div class="form-group">
+                <label for="comment">Comment:</label>
+                {% form_field comment_form.comment class="form-control" %}
+            </div>
+            <div class="col-xs-12 text-right"><button type="submit" name="submit" class="btn btn-primary">Comment</button></div>
+        </form>
+    </div>
 {% endblock content %}

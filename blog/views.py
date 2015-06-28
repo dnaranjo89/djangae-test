@@ -39,14 +39,17 @@ def display_article(request, article_id):
     article = Article.get_by_id(article_id)
     article.views += 1
     article.put()
-    article_form = ArticleForm(obj=article)
-
-    # Get the Article's comments (if exist)
-    comments_list = Comment.all().filter('article =', article)
 
     # Create empty form for new comments
     comment_form = CommentForm(article=article)
-    context_dict = {'article_id': article_id, 'article_form': article_form, 'comments_list': comments_list, 'comment_form': comment_form}
+
+    context_dict = {'article_id': article_id, 'article': article, 'comment_form': comment_form}
+
+    # Get the Article's comments (if exist)
+    comments_list = Comment.all().filter('article =', article)
+    if comments_list.count() > 0:
+        context_dict['comments_list'] = comments_list
+
     return render(request, 'display_article.html', context_dict)
 
 def send_comment(request, article_id):
