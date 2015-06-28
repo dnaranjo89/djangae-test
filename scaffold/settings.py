@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'djangae.contrib.gauth.datastore',
     'djangae.contrib.security',
     'wtforms',
+    'wtforms.ext.django',
     'blog',
 )
 
@@ -57,7 +58,7 @@ MIDDLEWARE_CLASSES = (
     'djangae.contrib.gauth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'csp.middleware.CSPMiddleware',
-    'session_csrf.CsrfMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'djangosecure.middleware.SecurityMiddleware',
 )
 
@@ -69,7 +70,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
-    "session_csrf.context_processor"
 )
 
 SECURE_CHECKS = [
