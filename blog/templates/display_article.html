@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load wtforms %}
 {% block content %}
     <a href="{% url 'index' %}">Back</a><br/>
     {% for field in article_form %}
@@ -7,16 +8,16 @@
         <br>
     {% endfor %}
     <p>---------------</p>
-
+    {% for comment in comments_list %}
+            {{ comment.comment }}
+            <br>
+    {% endfor %}
     <p>---------------</p>
 
     <form method="post"  action="{% url 'comment' article_id=article_id %}">
         {% csrf_token %}
-        {% for field in comment_form %}
-            {{ field.label }}
-            {{ field }}
-            <br>
-        {% endfor %}
+        {% form_field comment_form.article class="hidden" %}
+        {{ comment_form.comment }}
         <input type="submit" name="submit" value="Comment" />
     </form>
 {% endblock content %}

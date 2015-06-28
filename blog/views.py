@@ -34,11 +34,17 @@ def new_article(request):
 
 
 def display_article(request, article_id):
+    # Get the details of the article
     article_id = int(article_id)
-    comment_form = CommentForm()
-    article = Article.get_by_id(int(article_id))
+    article = Article.get_by_id(article_id)
     article_form = ArticleForm(obj=article)
-    context_dict = {'article_id': article_id, 'article_form': article_form, 'comment_form': comment_form}
+
+    # Get the Article's comments (if exist)
+    comments_list = Comment.all().filter('article =', article)
+
+    # Create empty form for new comments
+    comment_form = CommentForm(article=article)
+    context_dict = {'article_id': article_id, 'article_form': article_form, 'comments_list': comments_list, 'comment_form': comment_form}
     return render(request, 'display_article.html', context_dict)
 
 def send_comment(request, article_id):
@@ -48,7 +54,7 @@ def send_comment(request, article_id):
             comment = Comment()
             comment_form.populate_obj(comment)
             comment.put()
-    redirect(reverse('display_article', kwargs={'article_id': article_id}))
+    return redirect(reverse('display_article', kwargs={'article_id': article_id}))
 
 def populate(request):
     """

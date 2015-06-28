@@ -1,5 +1,6 @@
 from wtforms import fields
 from wtforms.ext.appengine.db import model_form
+from wtforms.ext.appengine.fields import ReferencePropertyField
 from blog.models import Article, Comment
 
 ArticleFormBase = model_form(Article)
@@ -10,7 +11,4 @@ class ArticleForm(ArticleFormBase):
 CommentFormBase = model_form(Comment)
 
 class CommentForm(CommentFormBase):
-    article = fields.HiddenField()
-    user = fields.HiddenField()
-    timestamp = fields.HiddenField()
-    comment = fields.TextAreaField()
+    pass
