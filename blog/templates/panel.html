@@ -22,11 +22,11 @@
             </thead>
             <tbody>
             {% for article in articles %}
-                <tr alt="{% url 'display_article' article_id=333 %}" data-article_id="{{d.pk}}">
+                <tr>
                     <td>{{ article.title }}</td>
                     <td>{{ article.body|slice:":150" }}...</td>
                     <td>{{ article.category }}</td>
-                    <td><span class="glyphicon glyphicon-pencil"></span><span class="glyphicon glyphicon-trash"></span></td>
+                    <td><a href="{% url 'edit_article' article_id=article.key.id %}"><span class="glyphicon glyphicon-pencil"></span></a><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
                 </tr>
             {% endfor %}
         {% else %}

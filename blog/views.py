@@ -59,6 +59,26 @@ def display_article(request, article_id):
 
     return render(request, 'display_article.html', context_dict)
 
+def edit_article(request, article_id):
+    if request.method == 'POST':
+        article_form = ArticleForm(request.POST)
+        context_dict = {'article_form': article_form}
+        if article_form.validate():
+            article = Article()
+            article_form.populate_obj(article)
+            article.put()
+            return redirect('index')
+    else:
+        # Get the details of the article
+        article_id = int(article_id)
+        article = Article.get_by_id(article_id)
+
+        article_form = ArticleForm(obj=article)
+        context_dict = {'article_form': article_form}
+
+    return render(request, 'edit_article.html', context_dict)
+
+
 def send_comment(request, article_id):
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)

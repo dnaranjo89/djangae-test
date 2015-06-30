@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load wtforms %}
+{% load static %}
+{% block content %}
+    <a href="{% url 'index' %}"><img id="back-arrow" src="{% static "img/back.png" %}" alt="Back"/> Back</a><br/>
+    <form id="article-form" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">{{ article_form.title.label }}</label>
+            {% form_field article_form.title class="form-control" %}
+        </div>
+        <div class="form-group">
+            <label for="body">{{ article_form.body.label }}</label>
+            {% form_field article_form.body class="form-control" placeholder="Write your article here..."%}
+        </div>
+        <div class="form-group">
+            <label for="body">{{ article_form.category.label }}</label>
+            {% form_field article_form.category class="form-control"%}
+        </div>
+        {% form_field article_form.image class="hidden" value="img/1.jpg"%}
+        {% form_field article_form.views class="hidden" %}
+        <a name="submit" class="btn btn-default">Cancel</a>
+        <button type="submit" name="submit" class="btn btn-primary">Edit Article</button>
+    </form>
+{% endblock content %}
