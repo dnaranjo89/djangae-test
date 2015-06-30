@@ -10,6 +10,7 @@ urlpatterns += patterns(
     url(r'^new-article', views.new_article, name='new_article'),
     url(r'^article/(?P<article_id>[0-9]+)/comment$', views.send_comment, name='comment'),
     url(r'^article/(?P<article_id>[0-9]+)/$', views.display_article, name='display_article'),
+    url(r'^panel/$', views.panel, name='panel'),
 
     url(r'^populate', views.populate, name='populate'),
 )

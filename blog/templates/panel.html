@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_head %}
+    <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'js/blog_datatable.js' %}"></script>
+    <link href="{% static 'css/jquery.dataTables.css' %}" rel="stylesheet">
+{% endblock extra_head %}
+
+{% block content %}
+    <div id="brand" class="text-center">Keep it simple.</div>
+    <a href="{% url 'index' %}"><img id="back-arrow" src="{% static "img/back.png" %}" alt="Back"/> Back</a><br/>
+    <div id="articles-list">
+        {% if articles %}
+            <table id="panel-articles" class=data-table" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Body</th>
+                    <th>Category</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for article in articles %}
+                <tr alt="{% url 'display_article' article_id=333 %}" data-article_id="{{d.pk}}">
+                    <td>{{ article.title }}</td>
+                    <td>{{ article.body|slice:":150" }}...</td>
+                    <td>{{ article.category }}</td>
+                    <td><span class="glyphicon glyphicon-pencil"></span><span class="glyphicon glyphicon-trash"></span></td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <strong>There are no articles to present.</strong>
+        {% endif %}
+    </div>
+{% endblock content %}

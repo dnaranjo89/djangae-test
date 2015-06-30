@@ -17,6 +17,12 @@ def index(request):
     return render(request, 'index.html', context_dict)
 
 
+def panel(request):
+    article_list = Article.all()
+    context_dict = {'articles': article_list}
+    return render(request, 'panel.html', context_dict)
+
+
 def new_article(request):
     """
     Add a new article to the DB
