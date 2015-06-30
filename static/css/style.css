@@ -76,6 +76,10 @@
     margin-top: -150px;
 }
 
+#new-article {
+    margin-right: 10px;
+}
+
 #comment {
     width: 100%;
 }

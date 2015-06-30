@@ -11,7 +11,10 @@
                 <option value="Plain stuff">Plain stuff</option>
             </select>
         </form>
-        <div class="col-xs-6"><a href="{% url "new_article" %}" class="btn btn-primary pull-right">New article</a></div>
+        <div class="col-xs-6">
+            <a href="{% url "panel" %}" class="btn btn-warning pull-right">Admin</a>
+            <a id="new-article" href="{% url "new_article" %}" class="btn btn-primary pull-right">New article</a>
+        </div>
     </div>
     <div id="articles-list">
         {% if articles %}
